@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+
+# Node.js
+node_modules/
+.next/
+
+# Build and output
+dist/
+build/
+out/
+
+# Environment files
+backend/.env
+.env
+.env.*
+
+# System/Editor files
+.DS_Store
+.vscode/
