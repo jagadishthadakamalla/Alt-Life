@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from routes.alt_life import generate_alt_life_story  # Correct import statement
+from app.routes.alt_life import generate_alt_life_story  # Correct import statement
 from fastapi.middleware.cors import CORSMiddleware  
 
 app = FastAPI()
