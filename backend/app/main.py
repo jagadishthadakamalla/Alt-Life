@@ -20,6 +20,10 @@ allow_headers=["*"],
 class PromptRequest(BaseModel):
     prompt: str
 
+@app.get("/")
+def read_root():
+    return {"message": "Alt-Life API is live."}
+
 @app.post("/generate")
 async def generate(request: PromptRequest):
     try:
