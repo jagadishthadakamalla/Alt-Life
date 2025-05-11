@@ -9,9 +9,9 @@ AZURE_URL = "https://jagadishtestopenai2025.openai.azure.com/openai/deployments/
 
 def generate_alt_life_story(prompt: str) -> str:
     full_prompt = (
-            f"Tell a short, real-feeling story about someone who says: '{prompt}'. "
-            "Keep it under 3-4 sentences. Make it feel raw, relatable, and meaningful — like something they post about on Instagram or talk about with a close friend."
-            )
+        f"Tell a short, real-feeling story about someone who says: '{prompt}'. "
+        "Keep it under 3-4 sentences. Make it feel raw, relatable, and meaningful — like something they post about on Instagram or talk about with a close friend."
+    )
 
     headers = {
         "api-key": AZURE_API_KEY,
@@ -42,10 +42,15 @@ def generate_alt_life_story(prompt: str) -> str:
         response = requests.post(AZURE_URL, headers=headers, json=payload)
         response.raise_for_status()
 
+        # Check if response is valid and contains the expected data
         result = response.json()
-        print("Azure response:", result)
 
-        return result["choices"][0]["message"]["content"]
+        if "choices" in result and len(result["choices"]) > 0:
+            print("Azure response:", result)
+            return result["choices"][0]["message"]["content"]
+        else:
+            print("Azure API returned unexpected data:", result)
+            return "Sorry, there was an issue generating the story."
 
     except requests.exceptions.HTTPError as http_err:
         print(f"HTTP error occurred: {http_err}")
